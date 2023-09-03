@@ -1,0 +1,19 @@
+.nasa-cont{
+    background-color: black;
+    color:white;
+    padding: 0.1rem 0.6rem 4rem 0.6rem;
+}
+.form-div{
+    padding: 1rem;
+}
+.history-div{
+    padding: 1rem;
+}
+img{
+    width: 80vw;
+    height: 70vh;
+}
+ul{
+    text-decoration: none;
+    list-style: none;
+}
