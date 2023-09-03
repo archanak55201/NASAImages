@@ -12,7 +12,7 @@ const pictureDate = document.querySelector("#picture-date");
 
 let arr = new Array();
 
-async function getCurrentImageOfTheDay(selectdate){
+async function getImageOfTheDay(selectdate){
     let date ;
     if(selectdate){
         date = selectdate;
@@ -33,37 +33,33 @@ async function getCurrentImageOfTheDay(selectdate){
 
     if(selectdate){
         pictureDate.innerHTML = `Picture on ${result.date}`;
-        const li = document.createElement('li');
-        li.innerHTML = `<a href="#">${selectdate}</a>`;
-        dateHistory.appendChild(li);
-        // console.log(li.children[0]);
-        const a = li.children[0];
-        a.addEventListener("click",getImageOfTheDay)
+        addSearchToHistory(selectdate);
         let obj = {
-            date :selectdate,
-           
+            date :selectdate, 
         }
         arr.push(obj);
-        localStorage.setItem('history',JSON.stringify(arr));
+        saveSearch(arr);
     }
 
 }
 
+function getCurrentImageOfTheDay(){
+    getImageOfTheDay();
+}
 getCurrentImageOfTheDay();
+
 
 searchBtn.addEventListener("click",(e)=>{
     e.preventDefault();
     // console.log(searchInput.value);
     const selectDate = searchInput.value;
-    getCurrentImageOfTheDay(selectDate);
+    getImageOfTheDay(selectDate);
 
 })
 
-function getImageOfTheDay(event){
+function getImageOfTheDayClick(event){
    
     const adate = event.target.innerHTML;
-   
-
    getFromLocalStorage(adate);
 }
 
@@ -81,5 +77,18 @@ function getImageOfTheDay(event){
     pictureDate.innerHTML = `Picture on ${result.date}`;
    
 
+}
+
+function saveSearch(arr){
+    localStorage.setItem('history',JSON.stringify(arr));
+}
+
+function addSearchToHistory(selectdate){
+    const li = document.createElement('li');
+        li.innerHTML = `<a href="#">${selectdate}</a>`;
+        dateHistory.appendChild(li);
+        // console.log(li.children[0]);
+        const a = li.children[0];
+        a.addEventListener("click",getImageOfTheDayClick)
 }
 
